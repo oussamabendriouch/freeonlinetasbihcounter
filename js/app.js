@@ -68,17 +68,26 @@ class TasbihApp {
     
     bindGlobalEvents() {
         // Handle adhkar section toggles
-        window.toggleAdhkar = (type) => {
-            const card = document.querySelector(`#${type}Adhkar`).closest('.adhkar-card');
-            const chevron = document.getElementById(`${type}Chevron`);
-            
-            card.classList.toggle('active');
-            
-            // Reload adhkar content when opening
-            if (card.classList.contains('active')) {
-                this.loadAdhkarSection(type);
-            }
-        };
+    window.toggleAdhkar = (type) => {
+    const card = document.querySelector(`#${type}Adhkar`).closest('.adhkar-card');
+    const chevron = document.getElementById(`${type}Chevron`);
+
+    const isOpen = card.classList.contains('active');
+
+    // أغلق جميع البطاقات أولاً إذا أردت فتح واحدة فقط
+    document.querySelectorAll('.adhkar-card').forEach(c => {
+        c.classList.remove('active');
+        c.querySelector('.adhkar-content')?.classList.add('hidden');
+    });
+
+    // إذا لم يكن مفتوحًا، افتحه وأضف المحتوى
+    if (!isOpen) {
+        card.classList.add('active');
+        card.querySelector('.adhkar-content')?.classList.remove('hidden');
+        tasbihApp.loadAdhkarSection(type);
+    }
+};
+
         
         // Handle smooth scrolling for internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
