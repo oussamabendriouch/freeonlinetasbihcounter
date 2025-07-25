@@ -641,33 +641,25 @@ body {
     border-top: 1px solid var(--border-color);
     padding: var(--spacing-xl) 0;
     margin-top: var(--spacing-2xl);
+
+    /* إضافة */
+    display: flex;
+    justify-content: center;  /* يوسّط أفقياً */
+    align-items: center;      /* يوسّط عمودياً */
+    text-align: center;       /* يوسّط النص داخل العنصر */
 }
 
 .footer-content {
-    text-align: center;
+    /* إزالة أو تعديل flex لأننا أعدنا التمركز من .footer */
+    /* يمكنك إلغاء هذا بالكامل إذا لم تحتاجه */
+    display: block;  /* أو يمكن حذفه */
 }
 
 .footer-text {
     color: var(--text-secondary);
     font-size: 0.875rem;
-    width: 100%;
 }
 
-.footer-links {
-    display: flex;
-    gap: var(--spacing-lg);
-}
-
-.footer-link {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.875rem;
-    transition: color var(--transition-fast);
-}
-
-.footer-link:hover {
-    color: var(--primary-green);
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
