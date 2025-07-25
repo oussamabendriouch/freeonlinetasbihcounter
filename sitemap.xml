@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://your-domain.com/</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://your-domain.com/en"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://your-domain.com/ar"/>
+        <xhtml:link rel="alternate" hreflang="id" href="https://your-domain.com/id"/>
+    </url>
+    
+    <url>
+        <loc>https://your-domain.com/en</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://your-domain.com/en"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://your-domain.com/ar"/>
+        <xhtml:link rel="alternate" hreflang="id" href="https://your-domain.com/id"/>
+    </url>
+    
+    <url>
+        <loc>https://your-domain.com/ar</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://your-domain.com/en"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://your-domain.com/ar"/>
+        <xhtml:link rel="alternate" hreflang="id" href="https://your-domain.com/id"/>
+    </url>
+    
+    <url>
+        <loc>https://your-domain.com/id</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://your-domain.com/en"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://your-domain.com/ar"/>
+        <xhtml:link rel="alternate" hreflang="id" href="https://your-domain.com/id"/>
+    </url>
+</urlset>

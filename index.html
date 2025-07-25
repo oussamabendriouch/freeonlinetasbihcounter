@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Tasbih Counter Online – Dhikr & Zikr Tally</title>
+    <meta name="description" content="Free online Tasbih & tally counter for Dhikr and Zikr. Select your Dhikr and start counting. Auto-save, mobile-friendly, no download needed.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Free Tasbih Counter Online – Dhikr & Zikr Tally">
+    <meta property="og:description" content="Use our free online Tasbih and tally counter for Dhikr and Zikr. Choose your Dhikr like 'SubhanAllah' or 'Alhamdulillah' and start counting. Auto-save, mobile-friendly, no download required.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com">
+    <meta property="og:image" content="https://your-domain.com/assets/logo.png">
+    
+    <!-- Favicon Placeholder -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-mode">
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo Placeholder -->
+                <div class="logo">
+                    <img src="/assets/logo.svg" alt="Tasbih Counter" class="logo-img">
+                    <span class="logo-text" data-key="app_title">Tasbih Counter</span>
+                </div>
+                
+                <!-- Controls -->
+                <div class="header-controls">
+                    <!-- Language Switcher -->
+                    <div class="language-switcher">
+                        <button class="lang-btn" id="langBtn">
+                            <i data-lucide="globe"></i>
+                            <span id="currentLang">EN</span>
+                            <i data-lucide="chevron-down"></i>
+                        </button>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <a href="/en" class="lang-option" data-lang="en">
+                                <span class="flag">🇺🇸</span>
+                                English
+                            </a>
+                            <a href="/ar" class="lang-option" data-lang="ar">
+                                <span class="flag">🇸🇦</span>
+                                العربية
+                            </a>
+                            <a href="/id" class="lang-option" data-lang="id">
+                                <span class="flag">🇮🇩</span>
+                                Indonesian
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i data-lucide="sun" class="sun-icon"></i>
+                        <i data-lucide="moon" class="moon-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1 class="hero-title" data-key="hero_title">Free Online Tasbih Counter</h1>
+                <p class="hero-description" data-key="hero_description">
+                    Count your dhikr and remembrance of Allah with our beautiful digital counter. 
+                    Auto-saves your progress and works on all devices.
+                </p>
+            </section>
+
+            <!-- Counter Section -->
+            <section class="counter-section">
+                <div class="counter-card">
+                    <!-- Dhikr Selector -->
+                    <div class="dhikr-selector">
+                        <label for="dhikrSelect" class="selector-label" data-key="select_dhikr">Select Dhikr:</label>
+                        <select id="dhikrSelect" class="dhikr-select">
+                            <option value="subhanallah" data-key="subhanallah">SubhanAllah</option>
+                            <option value="alhamdulillah" data-key="alhamdulillah">Alhamdulillah</option>
+                            <option value="allahu_akbar" data-key="allahu_akbar">Allahu Akbar</option>
+                            <option value="la_ilaha_illa_allah" data-key="la_ilaha_illa_allah">La ilaha illa Allah</option>
+                            <option value="astaghfirullah" data-key="astaghfirullah">Astaghfirullah</option>
+                            <option value="la_hawla_wala_quwwata" data-key="la_hawla_wala_quwwata">La hawla wa la quwwata illa billah</option>
+                        </select>
+                    </div>
+
+                    <!-- Counter Display -->
+                    <div class="counter-display">
+                        <div class="counter-number" id="counterNumber">0</div>
+                        <div class="counter-dhikr" id="counterDhikr" data-key="subhanallah">SubhanAllah</div>
+                    </div>
+
+                    <!-- Counter Controls -->
+                    <div class="counter-controls">
+                        <button class="counter-btn count-btn" id="countBtn">
+                            <i data-lucide="plus"></i>
+                            <span data-key="count">Count</span>
+                        </button>
+                        <button class="counter-btn reset-btn" id="resetBtn">
+                            <i data-lucide="refresh-cw"></i>
+                            <span data-key="reset">Reset</span>
+                        </button>
+                    </div>
+
+                    <!-- Motivational Message -->
+                    <div class="motivation-message" id="motivationMessage"></div>
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <section class="history-section">
+                <div class="history-card">
+                    <div class="history-header">
+                        <h3 class="history-title" data-key="activity_history">Activity History</h3>
+                        <button class="clear-history-btn" id="clearHistoryBtn">
+                            <i data-lucide="trash-2"></i>
+                            <span data-key="clear_history">Clear History</span>
+                        </button>
+                    </div>
+                    <div class="history-list" id="historyList">
+                        <div class="empty-history" data-key="no_activity">No activity yet. Start counting to see your progress!</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Adhkar Sections -->
+            <section class="adhkar-section">
+                <h2 class="section-title" data-key="morning_evening_adhkar">Morning & Evening Adhkar</h2>
+                
+                <!-- Morning Adhkar -->
+                <div class="adhkar-card">
+                    <div class="adhkar-header" onclick="toggleAdhkar('morning')">
+                        <h3 class="adhkar-title" data-key="morning_adhkar">Morning Adhkar</h3>
+                        <i data-lucide="chevron-down" class="adhkar-chevron" id="morningChevron"></i>
+                    </div>
+                    <div class="adhkar-content" id="morningAdhkar">
+                        <div class="adhkar-loading">Loading adhkar...</div>
+                    </div>
+                </div>
+
+                <!-- Evening Adhkar -->
+                <div class="adhkar-card">
+                    <div class="adhkar-header" onclick="toggleAdhkar('evening')">
+                        <h3 class="adhkar-title" data-key="evening_adhkar">Evening Adhkar</h3>
+                        <i data-lucide="chevron-down" class="adhkar-chevron" id="eveningChevron"></i>
+                    </div>
+                    <div class="adhkar-content" id="eveningAdhkar">
+                        <div class="adhkar-loading">Loading adhkar...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How to Use Section -->
+            <section class="instructions-section">
+                <h2 class="section-title" data-key="how_to_use">How to Use</h2>
+                <div class="instructions-grid">
+                    <div class="instruction-card">
+                        <div class="instruction-icon">
+                            <i data-lucide="mouse-pointer-click"></i>
+                        </div>
+                        <h3 class="instruction-title" data-key="step_1_title">Select Your Dhikr</h3>
+                        <p class="instruction-text" data-key="step_1_desc">Choose from popular Islamic remembrances like SubhanAllah, Alhamdulillah, and more.</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-icon">
+                            <i data-lucide="hand"></i>
+                        </div>
+                        <h3 class="instruction-title" data-key="step_2_title">Start Counting</h3>
+                        <p class="instruction-text" data-key="step_2_desc">Click the count button or tap anywhere on the counter to increment your dhikr.</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-icon">
+                            <i data-lucide="save"></i>
+                        </div>
+                        <h3 class="instruction-title" data-key="step_3_title">Auto-Save Progress</h3>
+                        <p class="instruction-text" data-key="step_3_desc">Your progress is automatically saved. Continue anytime without losing your count.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p data-key="footer_text">
+                        May Allah accept your dhikr and remembrance. Built with ❤️ for the Muslim community.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link" data-key="about">About</a>
+                    <a href="#" class="footer-link" data-key="contact">Contact</a>
+                    <a href="#" class="footer-link" data-key="privacy">Privacy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google AdSense Placeholder -->
+    <!-- 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID" crossorigin="anonymous"></script>
+    -->
+
+    <script src="js/translations.js"></script>
+    <script src="js/adhkar-data.js"></script>
+    <script src="js/counter.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
