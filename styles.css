@@ -650,6 +650,7 @@ body {
 .footer-text {
     color: var(--text-secondary);
     font-size: 0.875rem;
+    width: 100%;
 }
 
 .footer-links {
