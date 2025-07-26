@@ -5,12 +5,9 @@ import './index.css'
 // Since this is a vanilla HTML/JS app, we'll use a simple React wrapper
 function App() {
   React.useEffect(() => {
-    const redirectPath = sessionStorage.getItem("redirect");
-    if (redirectPath) {
-      sessionStorage.removeItem("redirect");
-      window.history.replaceState(null, "", redirectPath);
-    }
-  }, []);
+    window.location.href = '/index.html'
+  }, [])
+
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
