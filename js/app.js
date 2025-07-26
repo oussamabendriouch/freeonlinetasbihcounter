@@ -68,7 +68,7 @@ class TasbihApp {
     
     bindGlobalEvents() {
         // Handle adhkar section toggles
-     window.toggleAdhkar = (type) => {
+        window.toggleAdhkar = (type) => {
             const card = document.querySelector(`#${type}Adhkar`).closest('.adhkar-card');
             const chevron = document.getElementById(`${type}Chevron`);
             
