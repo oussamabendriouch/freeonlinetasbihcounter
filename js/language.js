@@ -64,11 +64,16 @@ class LanguageManager {
         this.saveLanguage();
         this.closeDropdown();
         
-        // Update URL without page reload
-        const newPath = `/${lang}`;
-        if (window.location.pathname !== newPath) {
-            window.history.pushState({}, '', newPath);
-        }
+        // Redirect to actual URL for each language version
+const langLinks = {
+    en: 'https://freetasbihcounter.online/en/',
+    ar: 'https://freetasbihcounter.online/ar/',
+    id: 'https://freetasbihcounter.online/id/'
+};
+
+if (langLinks[lang]) {
+    window.location.href = langLinks[lang];
+}
         
         // Update page language and direction
         document.documentElement.lang = lang;
