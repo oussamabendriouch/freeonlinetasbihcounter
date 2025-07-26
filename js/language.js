@@ -37,10 +37,11 @@ class LanguageManager {
         const langOptions = this.langDropdown.querySelectorAll('.lang-option');
         langOptions.forEach(option => {
             option.addEventListener('click', (e) => {
-                e.preventDefault();
-                const lang = option.getAttribute('data-lang');
-                this.changeLanguage(lang);
-            });
+    e.preventDefault();
+    const lang = option.getAttribute('data-lang');
+    this.saveLanguage(); // حفظ اللغة في localStorage
+    window.location.href = `/${lang}`; // توجيه مباشر لصفحة اللغة
+});
         });
     }
 
