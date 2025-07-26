@@ -63,16 +63,14 @@ class LanguageManager {
     }
     
     changeLanguage(lang) {
-        this.currentLang = lang;
-        this.updateLanguage();
-        this.saveLanguage();
-        this.closeDropdown();
-        
-        // Update URL without page reload
-        const newPath = `/${lang}/`;
-        if (window.location.pathname !== newPath) {
-            window.history.pushState({}, '', newPath);
-        }
+    this.saveLanguage();         // حفظ اللغة في localStorage
+    this.closeDropdown();        // إغلاق القائمة المنسدلة
+
+    // توجيه المستخدم مباشرة إلى صفحة اللغة المطلوبة
+    const newPath = `/${lang}/index.html`;
+    window.location.href = newPath;
+}
+
         
         // Update page language and direction
         document.documentElement.lang = lang;
