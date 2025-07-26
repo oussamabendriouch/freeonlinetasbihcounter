@@ -12,11 +12,11 @@ class LanguageManager {
 
     detectLanguage() {
         const path = window.location.pathname;
-        if (path.startsWith('/ar')) {
+        if (path.startsWith('/ar/')) {
             this.currentLang = 'ar';
-        } else if (path.startsWith('/id')) {
+        } else if (path.startsWith('/id/')) {
             this.currentLang = 'id';
-        } else if (path.startsWith('/en')) {
+        } else if (path.startsWith('/en/')) {
             this.currentLang = 'en';
         } else {
             const savedLang = localStorage.getItem('tasbihLanguage');
