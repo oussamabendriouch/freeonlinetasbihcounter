@@ -4,7 +4,7 @@ class LanguageManager {
         this.langBtn = document.getElementById('langBtn');
         this.langDropdown = document.getElementById('langDropdown');
         this.currentLangSpan = document.getElementById('currentLang');
-        
+
         this.detectLanguage();
         this.bindEvents();
         this.updateLanguage();
@@ -20,7 +20,7 @@ class LanguageManager {
             this.currentLang = 'en';
         }
 
-        // Fallback to saved language only if no lang in path
+        // إذا لم يكن في المسار لغة، استخدم اللغة المحفوظة
         const savedLang = localStorage.getItem('tasbihLanguage');
         if (savedLang && !path.match(/^\/(ar|id|en)/)) {
             this.currentLang = savedLang;
@@ -28,16 +28,18 @@ class LanguageManager {
     }
 
     bindEvents() {
+        // زر اللغة
         this.langBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             this.toggleDropdown();
         });
 
-        // Close dropdown when clicking outside
+        // إغلاق القائمة عند النقر خارجها
         document.addEventListener('click', () => {
             this.closeDropdown();
         });
 
+        // اختيار اللغة
         const langOptions = this.langDropdown.querySelectorAll('.lang-option');
         langOptions.forEach(option => {
             option.addEventListener('click', (e) => {
@@ -49,7 +51,11 @@ class LanguageManager {
     }
 
     toggleDropdown() {
-        this.langDropdown.classList.toggle('hidden');
+        if (this.langDropdown.classList.contains('hidden')) {
+            this.langDropdown.classList.remove('hidden');
+        } else {
+            this.langDropdown.classList.add('hidden');
+        }
     }
 
     closeDropdown() {
@@ -58,11 +64,10 @@ class LanguageManager {
 
     changeLanguage(lang) {
         this.currentLang = lang;
-        this.updateLanguage();
         this.saveLanguage();
         this.closeDropdown();
 
-        // ✅ Actual redirect to folder (no pushState)
+        // ✅ توجيه حقيقي إلى مجلد اللغة
         window.location.href = `/${lang}/`;
     }
 
@@ -91,7 +96,9 @@ class LanguageManager {
             'ar': 'العربية',
             'id': 'ID'
         };
-        this.currentLangSpan.textContent = langMap[this.currentLang] || 'EN';
+        if (this.currentLangSpan) {
+            this.currentLangSpan.textContent = langMap[this.currentLang] || 'EN';
+        }
 
         document.documentElement.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
         document.documentElement.lang = this.currentLang;
@@ -149,6 +156,7 @@ class LanguageManager {
     }
 }
 
+// ⏳ عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', () => {
     window.languageManager = new LanguageManager();
 });
