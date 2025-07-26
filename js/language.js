@@ -65,7 +65,7 @@ class LanguageManager {
         this.closeDropdown();
         
         // Update URL without page reload
-        const newPath = /${lang};
+        const newPath = `/${lang}`;
         if (window.location.pathname !== newPath) {
             window.history.pushState({}, '', newPath);
         }
