@@ -43,9 +43,9 @@ class LanguageManager {
             option.addEventListener('click', (e) => {
     e.preventDefault();
     const lang = option.getAttribute('data-lang');
-    this.saveLanguage(); // حفظ اللغة في localStorage
-    window.location.href = `/${lang}`; // توجيه مباشر لصفحة اللغة
+    this.changeLanguage(lang);
 });
+
         });
     }
 
