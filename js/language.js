@@ -4,78 +4,90 @@ class LanguageManager {
         this.langBtn = document.getElementById('langBtn');
         this.langDropdown = document.getElementById('langDropdown');
         this.currentLangSpan = document.getElementById('currentLang');
-
+        
         this.detectLanguage();
         this.bindEvents();
         this.updateLanguage();
     }
-
+    
     detectLanguage() {
+        // Get language from URL
         const path = window.location.pathname;
-        if (path.startsWith('/ar/')) {
+        if (path.startsWith('/ar')) {
             this.currentLang = 'ar';
-        } else if (path.startsWith('/id/')) {
+        } else if (path.startsWith('/id')) {
             this.currentLang = 'id';
-        } else if (path.startsWith('/en/')) {
-            this.currentLang = 'en';
         } else {
-            const savedLang = localStorage.getItem('tasbihLanguage');
-            this.currentLang = savedLang || 'en';
+            this.currentLang = 'en';
+        }
+        
+        // Fallback to saved language
+        const savedLang = localStorage.getItem('tasbihLanguage');
+        if (savedLang && !path.match(/^\/(ar|id|en)/)) {
+            this.currentLang = savedLang;
         }
     }
-
+    
     bindEvents() {
         this.langBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             this.toggleDropdown();
         });
-
-        document.addEventListener('click', (e) => {
-    // لا تغلق القائمة إذا كان النقر داخل الزر أو القائمة
-    if (!this.langBtn.contains(e.target) && !this.langDropdown.contains(e.target)) {
-        this.closeDropdown();
-    }
-});
-
-
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            this.closeDropdown();
+        });
+        
+        // Handle language selection
         const langOptions = this.langDropdown.querySelectorAll('.lang-option');
         langOptions.forEach(option => {
             option.addEventListener('click', (e) => {
-    e.preventDefault();
-    const lang = option.getAttribute('data-lang');
-    this.changeLanguage(lang);
-});
-
+                e.preventDefault();
+                const lang = option.getAttribute('data-lang');
+                this.changeLanguage(lang);
+            });
         });
     }
-
+    
     toggleDropdown() {
         this.langBtn.parentElement.classList.toggle('active');
     }
-
+    
     closeDropdown() {
         this.langBtn.parentElement.classList.remove('active');
     }
-
+    
     changeLanguage(lang) {
-    if (!lang) return;
-
-    localStorage.setItem('tasbihLanguage', lang);
-    const targetPath = `/${lang}/`;
-
-    if (window.location.pathname !== targetPath) {
-        window.location.href = targetPath;
-    } else {
-        window.location.reload();  // Reload the same page if already on it
+        this.currentLang = lang;
+        this.updateLanguage();
+        this.saveLanguage();
+        this.closeDropdown();
+        
+        // Update URL without page reload
+        const newPath = /${lang};
+        if (window.location.pathname !== newPath) {
+            window.history.pushState({}, '', newPath);
+        }
+        
+        // Update page language and direction
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        
+        // Update counter language
+        if (window.tasbihCounter) {
+            window.tasbihCounter.updateLanguage(lang);
+        }
     }
-}
-
-
+    
     updateLanguage() {
-        if (!window.translations || !window.translations[this.currentLang]) return;
-
+        if (!window.translations || !window.translations[this.currentLang]) {
+            return;
+        }
+        
         const translations = window.translations[this.currentLang];
-
+        
+        // Update all elements with data-key attributes
         document.querySelectorAll('[data-key]').forEach(element => {
             const key = element.getAttribute('data-key');
             if (translations[key]) {
@@ -88,20 +100,23 @@ class LanguageManager {
                 }
             }
         });
-
+        
+        // Update page title and meta description
         this.updateSEO();
-
+        
+        // Update current language display
         const langMap = {
-            en: 'EN',
-            ar: 'العربية',
-            id: 'ID'
+            'en': 'EN',
+            'ar': 'العربية',
+            'id': 'ID'
         };
         this.currentLangSpan.textContent = langMap[this.currentLang] || 'EN';
-
+        
+        // Update document direction
         document.documentElement.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
         document.documentElement.lang = this.currentLang;
     }
-
+    
     updateSEO() {
         const seoData = {
             en: {
@@ -117,33 +132,48 @@ class LanguageManager {
                 description: "Penghitung tasbih & tally online gratis untuk dzikir. Pilih dzikir Anda dan mulai menghitung. Simpan otomatis, ramah seluler, tanpa unduhan."
             }
         };
-
+        
         const currentSEO = seoData[this.currentLang] || seoData.en;
+        
+        // Update title
         document.title = currentSEO.title;
-
+        
+        // Update meta description
         let metaDescription = document.querySelector('meta[name="description"]');
-        if (metaDescription) metaDescription.content = currentSEO.description;
-
+        if (metaDescription) {
+            metaDescription.content = currentSEO.description;
+        }
+        
+        // Update Open Graph tags
         let ogTitle = document.querySelector('meta[property="og:title"]');
-        if (ogTitle) ogTitle.content = currentSEO.title;
-
+        if (ogTitle) {
+            ogTitle.content = currentSEO.title;
+        }
+        
         let ogDescription = document.querySelector('meta[property="og:description"]');
-        if (ogDescription) ogDescription.content = currentSEO.description;
+        if (ogDescription) {
+            ogDescription.content = currentSEO.description;
+        }
     }
-
+    
+    saveLanguage() {
+        localStorage.setItem('tasbihLanguage', this.currentLang);
+    }
+    
     getCurrentLanguage() {
         return this.currentLang;
     }
-
+    
     loadAdhkar(type) {
         if (!window.adhkarData || !window.adhkarData[type] || !window.adhkarData[type][this.currentLang]) {
             return [];
         }
-
+        
         return window.adhkarData[type][this.currentLang];
     }
 }
 
+// Initialize language manager when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.languageManager = new LanguageManager();
 });
