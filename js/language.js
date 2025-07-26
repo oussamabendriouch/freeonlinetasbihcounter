@@ -63,16 +63,16 @@ class LanguageManager {
     }
     
    changeLanguage(lang) {
-    const currentPath = window.location.pathname;
-    const newPath = `/${lang}/`;
-
-    // حتى لو كنا بالفعل في نفس الصفحة، نعيد التوجيه
-    if (currentPath !== newPath) {
-        window.location.href = newPath;
-    } else {
-        window.location.reload(); // إعادة تحميل الصفحة نفسها
-    }
-}
+        this.currentLang = lang;
+        this.updateLanguage();
+        this.saveLanguage();
+        this.closeDropdown();
+        
+        // Update URL without page reload
+        const newPath = `/${lang}/`;
+        if (window.location.pathname !== newPath) {
+            window.history.pushState({}, '', newPath);
+        }
 
 
         
