@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عداد تسبيح إلكتروني مجاني</title>
+  <meta name="description" content="عداد تسبيح مجاني. قم بعدّ الأذكار بسهولة. سبحان الله، الحمد لله، الله أكبر.">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <h1>عداد تسبيح</h1>
+    <nav>
+      <a href="/en">English</a> |
+      <a href="/ar">العربية</a> |
+      <a href="/id">Indonesia</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>ابدأ التسبيح</h2>
+    <button id="counterBtn">عدّ</button>
+    <p id="count">0</p>
+    <button id="resetBtn">إعادة</button>
+  </main>
+
+  <script>
+    let count = 0;
+    const counterBtn = document.getElementById('counterBtn');
+    const countDisplay = document.getElementById('count');
+    const resetBtn = document.getElementById('resetBtn');
+
+    counterBtn.onclick = () => {
+      count++;
+      countDisplay.textContent = count;
+    }
+
+    resetBtn.onclick = () => {
+      count = 0;
+      countDisplay.textContent = count;
+    }
+  </script>
+</body>
+</html>
