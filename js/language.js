@@ -13,9 +13,9 @@ class LanguageManager {
     detectLanguage() {
         // Get language from URL
         const path = window.location.pathname;
-        if (path.startsWith('/ar')) {
+        if (path.startsWith('/ar/')) {
             this.currentLang = 'ar';
-        } else if (path.startsWith('/id')) {
+        } else if (path.startsWith('/id/')) {
             this.currentLang = 'id';
         } else {
             this.currentLang = 'en';
