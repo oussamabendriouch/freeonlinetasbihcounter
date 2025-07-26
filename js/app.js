@@ -68,17 +68,17 @@ class TasbihApp {
     
     bindGlobalEvents() {
         // Handle adhkar section toggles
-   window.toggleAdhkar = (type) => {
-    const card = document.querySelector(`#${type}Adhkar`).closest('.adhkar-card');
-    const content = document.querySelector(`#${type}Adhkar`);
-    
-    card.classList.toggle('active');
-    content.classList.toggle('hidden');
-
-    if (!content.classList.contains('hidden')) {
-        tasbihApp.loadAdhkarSection(type);
-    }
-};
+    window.toggleAdhkar = (type) => {
+            const card = document.querySelector(`#${type}Adhkar`).closest('.adhkar-card');
+            const chevron = document.getElementById(`${type}Chevron`);
+            
+            card.classList.toggle('active');
+            
+            // Reload adhkar content when opening
+            if (card.classList.contains('active')) {
+                this.loadAdhkarSection(type);
+            }
+        };
 
         
         // Handle smooth scrolling for internal links
