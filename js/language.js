@@ -40,18 +40,14 @@ class LanguageManager {
         });
         
         // Handle language selection
-        this.langDropdown.addEventListener('click', (e) => {
-    const option = e.target.closest('.lang-option');
-    if (!option) return; // تم النقر على شيء غير صالح
-
-    e.preventDefault();
-    const lang = option.getAttribute('data-lang');
-
-    if (lang && ['en', 'ar', 'id'].includes(lang)) {
-        this.changeLanguage(lang);
-    }
-});
-
+        const langOptions = this.langDropdown.querySelectorAll('.lang-option');
+        langOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = option.getAttribute('data-lang');
+                this.changeLanguage(lang);
+            });
+        });
     }
     
     toggleDropdown() {
@@ -62,19 +58,17 @@ class LanguageManager {
         this.langBtn.parentElement.classList.remove('active');
     }
     
-   changeLanguage(lang) {
+    changeLanguage(lang) {
         this.currentLang = lang;
         this.updateLanguage();
         this.saveLanguage();
         this.closeDropdown();
         
         // Update URL without page reload
-        const newPath = `/${lang}/`;
+        const newPath = `/${lang}`;
         if (window.location.pathname !== newPath) {
             window.history.pushState({}, '', newPath);
         }
-
-
         
         // Update page language and direction
         document.documentElement.lang = lang;
