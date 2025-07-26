@@ -30,9 +30,13 @@ class LanguageManager {
             this.toggleDropdown();
         });
 
-        document.addEventListener('click', () => {
-            this.closeDropdown();
-        });
+        document.addEventListener('click', (e) => {
+    // لا تغلق القائمة إذا كان النقر داخل الزر أو القائمة
+    if (!this.langBtn.contains(e.target) && !this.langDropdown.contains(e.target)) {
+        this.closeDropdown();
+    }
+});
+
 
         const langOptions = this.langDropdown.querySelectorAll('.lang-option');
         langOptions.forEach(option => {
