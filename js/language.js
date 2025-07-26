@@ -59,26 +59,14 @@ class LanguageManager {
     }
     
     changeLanguage(lang) {
-        this.currentLang = lang;
-        this.updateLanguage();
-        this.saveLanguage();
-        this.closeDropdown();
-        
-        // Update URL without page reload
-        const newPath = `/${lang}/`;
-        if (window.location.pathname !== newPath) {
-            window.history.pushState({}, '', newPath);
-        }
-        
-        // Update page language and direction
-        document.documentElement.lang = lang;
-        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        
-        // Update counter language
-        if (window.tasbihCounter) {
-            window.tasbihCounter.updateLanguage(lang);
-        }
-    }
+    this.saveLanguage();         // حفظ اللغة في localStorage
+    this.closeDropdown();        // إغلاق القائمة المنسدلة
+
+    // ✅ التوجيه إلى الملف الصحيح لكل لغة
+    const newPath = `/${lang}/index.html`;
+    window.location.href = newPath;
+}
+
     
     updateLanguage() {
         if (!window.translations || !window.translations[this.currentLang]) {
