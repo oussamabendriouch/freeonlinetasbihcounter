@@ -59,33 +59,16 @@ class LanguageManager {
     }
     
     changeLanguage(lang) {
-    this.currentLang = lang;
-    this.saveLanguage();
-    this.closeDropdown();
-
-    // إعادة توجيه المستخدم إلى الصفحة المناسبة حسب اللغة
-    const langLinks = {
-        en: 'https://freetasbihcounter.online/en/',
-        ar: 'https://freetasbihcounter.online/ar/',
-        id: 'https://freetasbihcounter.online/id/'
-    };
-
-    if (langLinks[lang]) {
-        window.location.href = langLinks[lang];
-    }
-}
-
+        this.currentLang = lang;
+        this.updateLanguage();
+        this.saveLanguage();
+        this.closeDropdown();
         
-        // Redirect to actual URL for each language version
-const langLinks = {
-    en: 'https://freetasbihcounter.online/en/',
-    ar: 'https://freetasbihcounter.online/ar/',
-    id: 'https://freetasbihcounter.online/id/'
-};
-
-if (langLinks[lang]) {
-    window.location.href = langLinks[lang];
-}
+        // Update URL without page reload
+        const newPath = /${lang};
+        if (window.location.pathname !== newPath) {
+            window.history.pushState({}, '', newPath);
+        }
         
         // Update page language and direction
         document.documentElement.lang = lang;
