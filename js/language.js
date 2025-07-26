@@ -124,7 +124,7 @@ class LanguageManager {
                 description: "Free online Tasbih & tally counter for Dhikr and Zikr. Select your Dhikr and start counting. Auto-save, mobile-friendly, no download needed."
             },
             ar: {
-                title: "عداد تسبيح مجاني أون لاين – لحساب الذكر والذِكر",
+                title: "عداد تسبيح مجاني أون لاين – للذكر والاستغفار",
                 description: "عداد تسبيح وعدّ أذكار مجاني عبر الإنترنت. اختر الذكر الذي تريده وابدأ العد فورًا. يحفظ تلقائيًا، متوافق مع الجوال، بدون تحميل."
             },
             id: {
