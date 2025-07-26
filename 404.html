@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <script type="text/javascript">
-      // إعادة التوجيه إلى index.html مع المسار الصحيح
       const pathname = window.location.pathname;
-      sessionStorage.redirect = pathname;
+      sessionStorage.setItem("redirect", pathname);
       window.location.replace("/");
     </script>
   </head>
