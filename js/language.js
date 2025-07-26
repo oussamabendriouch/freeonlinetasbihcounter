@@ -62,14 +62,18 @@ class LanguageManager {
         this.langBtn.parentElement.classList.remove('active');
     }
     
-    changeLanguage(lang) {
-    this.saveLanguage();         // حفظ اللغة في localStorage
-    this.closeDropdown();        // إغلاق القائمة المنسدلة
+   changeLanguage(lang) {
+    const currentPath = window.location.pathname;
+    const newPath = `/${lang}/`;
 
-    // توجيه المستخدم مباشرة إلى صفحة اللغة المطلوبة
-    const newPath = `/${lang}/index.html`;
-    window.location.href = newPath;
+    // حتى لو كنا بالفعل في نفس الصفحة، نعيد التوجيه
+    if (currentPath !== newPath) {
+        window.location.href = newPath;
+    } else {
+        window.location.reload(); // إعادة تحميل الصفحة نفسها
+    }
 }
+
 
         
         // Update page language and direction
