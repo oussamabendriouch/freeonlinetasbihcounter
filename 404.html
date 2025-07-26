@@ -3,9 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <script type="text/javascript">
-      const pathname = window.location.pathname;
-      sessionStorage.setItem("redirect", pathname);
-      window.location.replace("/");
+      (function () {
+        const redirectPath = window.location.pathname;
+
+        // تعديل عنوان URL فقط بدون تغيير الصفحة فعليًا
+        history.replaceState(null, "", "/");
+
+        // تخزين المسار الأصلي مؤقتًا
+        sessionStorage.setItem("redirect", redirectPath);
+
+        // إعادة تحميل التطبيق من البداية
+        window.location.reload();
+      })();
     </script>
   </head>
   <body></body>
