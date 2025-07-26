@@ -38,13 +38,16 @@ class LanguageManager {
 
         const langOptions = this.langDropdown.querySelectorAll('.lang-option');
         langOptions.forEach(option => {
-            option.addEventListener('click', (e) => {
-                e.preventDefault();
-                const selectedLang = option.getAttribute('data-lang');
-                
-                // ✅ تحديث حتى لو نفس اللغة
-                this.changeLanguage(selectedLang);
-            });
+           option.addEventListener('click', (e) => {
+    e.preventDefault();
+    const selectedLang = option.getAttribute('data-lang');
+
+    // ✅ تأكد من أن قيمة اللغة صحيحة
+    if (selectedLang && ['en', 'ar', 'id'].includes(selectedLang)) {
+        this.changeLanguage(selectedLang);
+    }
+});
+
         });
     }
 
